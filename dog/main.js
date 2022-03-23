@@ -24,4 +24,21 @@ const criarImagem = (imagem) => {
   img.classList.add("imagem");
   return img;
 };
+
+const pesquisarRacas = async () => {
+  const url = `https://dog.ceo/api/breeds/list/all`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return Object.keys(data.message)
+};
+
+const carregarRacas = async() => {
+  const racas = await pesquisarRacas()
+  const lista = document.getElementById("lista-racas")
+  lista.innerHTML = `<option> ${racas.join("</option><option>")} </option>`;
+
+}
+
+carregarRacas();
 pesquisar.addEventListener("click", carregarImagens);
+
